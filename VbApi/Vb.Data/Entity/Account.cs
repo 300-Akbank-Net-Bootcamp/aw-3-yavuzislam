@@ -43,6 +43,7 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
         builder.Property(x => x.OpenDate).IsRequired(true);
 
         builder.HasIndex(x => x.CustomerId);
+        builder.HasIndex(x => x.IBAN).IsUnique(true);
         builder.HasIndex(x => x.AccountNumber).IsUnique(true);
         builder.HasKey(x => x.AccountNumber);
 
