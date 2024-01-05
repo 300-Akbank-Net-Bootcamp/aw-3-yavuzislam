@@ -18,7 +18,6 @@ public class AccountTransaction : BaseEntityWithId
     public string TransferType { get; set; }
 }
 
-
 public class AccountTransactionConfiguration : IEntityTypeConfiguration<AccountTransaction>
 {
     public void Configure(EntityTypeBuilder<AccountTransaction> builder)
@@ -36,6 +35,6 @@ public class AccountTransactionConfiguration : IEntityTypeConfiguration<AccountT
         builder.Property(x => x.TransferType).IsRequired(true).HasMaxLength(10);
         builder.Property(x => x.ReferenceNumber).IsRequired(true).HasMaxLength(50);
 
-        builder.HasIndex(x => x.ReferenceNumber);
+        builder.HasIndex(x => x.ReferenceNumber).IsUnique(true);
     }
 }
