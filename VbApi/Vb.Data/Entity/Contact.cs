@@ -32,5 +32,6 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
 
         builder.HasIndex(x => x.CustomerId);
         builder.HasIndex(x => new { x.Information, x.ContactType }).IsUnique(true);
+        builder.HasIndex(x => x.IsDefault).IsUnique(true);
     }
 }
