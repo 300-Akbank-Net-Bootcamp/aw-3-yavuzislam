@@ -12,6 +12,6 @@ public class CreateCustomerValidator : AbstractValidator<CustomerRequest>
         RuleFor(x => x.IdentityNumber).NotEmpty().MaximumLength(11).WithName("Customer tax or identity number");
         RuleFor(x => x.DateOfBirth).NotEmpty();
 
-        RuleForEach(x => x.Addresses).SetValidator(new CreateAddressValidator());
+        // RuleForEach(x => x.Addresses).SetValidator(new CreateAddressValidator());
     }
 }
