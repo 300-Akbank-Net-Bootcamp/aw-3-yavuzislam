@@ -15,9 +15,9 @@ public class CustomerRequest : BaseRequest
     public string LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
 
-    public virtual List<AddressRequest> Addresses { get; set; }
-    public virtual List<ContactRequest> Contacts { get; set; }
-    public virtual List<AccountRequest> Accounts { get; set; }
+    // public virtual List<AddressRequest> Addresses { get; set; }
+    // public virtual List<ContactRequest> Contacts { get; set; }
+    // public virtual List<AccountRequest> Accounts { get; set; }
 }
 
 public class CustomerResponse : BaseResponse
