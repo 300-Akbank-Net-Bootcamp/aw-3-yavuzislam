@@ -1,4 +1,3 @@
-
 using System.Reflection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
@@ -7,6 +6,7 @@ using Vb.Data;
 using Vb.Business.Cqrs;
 using Vb.Business.Mapper;
 using Vb.Business.Validator;
+
 
 namespace VbApi;
 
@@ -23,9 +23,9 @@ public class Startup
     {
         string connection = Configuration.GetConnectionString("MsSqlConnection");
         services.AddDbContext<VbDbContext>(options => options.UseSqlServer(connection));
-        //services.AddDbContext<VbDbContext>(options => options.UseNpgsql(connection));
-        
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateCustomerCommand).GetTypeInfo().Assembly));
+
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(typeof(CreateCustomerCommand).GetTypeInfo().Assembly));
 
         var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MapperConfig()));
         services.AddSingleton(mapperConfig.CreateMapper());
@@ -34,13 +34,16 @@ public class Startup
         services.AddControllers().AddFluentValidation(x =>
         {
             x.RegisterValidatorsFromAssemblyContaining<CreateCustomerValidator>();
+            x.RegisterValidatorsFromAssemblyContaining<CreateAddressValidator>();
+            x.RegisterValidatorsFromAssemblyContaining<ContactValidator>();
+            x.RegisterValidatorsFromAssemblyContaining<AccountValidator>();
+            x.RegisterValidatorsFromAssemblyContaining<AccountTransactionValidator>();
         });
-        
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
     }
-    
-    public void Configure(IApplicationBuilder app,IWebHostEnvironment env)
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
