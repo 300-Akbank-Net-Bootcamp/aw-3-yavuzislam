@@ -39,6 +39,6 @@ public class EftTransactionConfiguration : IEntityTypeConfiguration<EftTransacti
         builder.Property(x => x.SenderIban).IsRequired(true).HasMaxLength(50);
         builder.Property(x => x.SenderName).IsRequired(true).HasMaxLength(50);
         
-        builder.HasIndex(x => x.ReferenceNumber);
+        builder.HasIndex(x => x.ReferenceNumber).IsUnique(true);
     }
 }
