@@ -58,10 +58,8 @@ public class AccountQueryHandler : IRequestHandler<GetAllAccountQuery, ApiRespon
     {
         var list = await dbContext.Set<Account>()
             .Include(x => x.Customer)
-            .Where(x =>
-                x.CustomerId == request.CustomerId ||
-                x.AccountNumber == request.AccountNumber
-            ).ToListAsync(cancellationToken);
+            .Where(x => x.CurrencyType == request.CurrencyType && x.Name == request.Name)
+            .ToListAsync(cancellationToken);
 
         var mappedList = mapper.Map<List<Account>, List<AccountResponse>>(list);
         return new ApiResponse<List<AccountResponse>>(mappedList);
