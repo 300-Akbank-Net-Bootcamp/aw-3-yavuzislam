@@ -32,6 +32,15 @@ public class AccountsController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+    
+    [HttpGet("SearchByParameter")]
+    public async Task<ApiResponse<List<AccountResponse>>> GetAccountsByParameter(
+        [FromQuery] string currencyType, [FromQuery] string name)
+    {
+        var query = new GetAccountByParameterQuery(currencyType, name);
+        var result = await mediator.Send(query);
+        return result;
+    }
 
     [HttpPost]
     public async Task<ApiResponse<AccountResponse>> Post([FromBody] AccountRequest account)

@@ -8,7 +8,7 @@ public record GetAllAccountQuery() : IRequest<ApiResponse<List<AccountResponse>>
 
 public record GetAccountByIdQuery(int Id) : IRequest<ApiResponse<AccountResponse>>;
 
-public record GetAccountByParameterQuery(int CustomerId, int AccountNumber)
+public record GetAccountByParameterQuery(string CurrencyType,string Name)
     : IRequest<ApiResponse<List<AccountResponse>>>;
 
 public record CreateAccountCommand(AccountRequest Model) : IRequest<ApiResponse<AccountResponse>>;

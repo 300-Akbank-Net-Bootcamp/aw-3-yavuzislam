@@ -54,7 +54,7 @@ public class AddressQueryHandler :
     {
         var list = await dbContext.Set<Address>()
             .Include(x => x.Customer)
-            .Where(x => x.CustomerId == request.CustomerId && x.IsDefault == request.IsDefault)
+            .Where(x => x.Country == request.Country)
             .ToListAsync(cancellationToken);
 
         var mappedList = mapper.Map<List<Address>, List<AddressResponse>>(list);

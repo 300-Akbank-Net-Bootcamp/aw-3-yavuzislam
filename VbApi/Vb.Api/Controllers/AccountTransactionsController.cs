@@ -33,6 +33,16 @@ public class AccountTransactionsController : ControllerBase
         return result;
     }
 
+    [HttpGet("SearchByParameter")]
+    public async Task<ApiResponse<List<AccountTransactionResponse>>> GetAccountTransactionsByParameter(
+        [FromQuery] string referenceNumber, [FromQuery] string transferType)
+    {
+        var query = new GetAccountTransactionByParameterQuery(referenceNumber, transferType);
+        var result = await mediator.Send(query);
+        return result;
+    }
+
+
     [HttpPost]
     public async Task<ApiResponse<AccountTransactionResponse>> Post(
         [FromBody] AccountTransactionRequest accountTransaction)

@@ -31,6 +31,15 @@ public class CustomersController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+    
+    [HttpGet("SearchByParameter")]
+    public async Task<ApiResponse<List<CustomerResponse>>> GetCustomersByParameter(
+        [FromQuery] string firstName, [FromQuery] string lastName, [FromQuery] string identityNumber)
+    {
+        var query = new GetCustomerByParameterQuery(firstName, lastName, identityNumber);
+        var result = await mediator.Send(query);
+        return result;
+    }
 
     [HttpPost]
     public async Task<ApiResponse<CustomerResponse>> Post([FromBody] CustomerRequest customer)
