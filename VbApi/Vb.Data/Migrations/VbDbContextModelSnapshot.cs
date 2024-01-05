@@ -75,6 +75,9 @@ namespace Vb.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("IBAN")
+                        .IsUnique();
+
                     b.ToTable("Account", "dbo");
                 });
 
@@ -131,7 +134,8 @@ namespace Vb.Data.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.HasIndex("ReferenceNumber");
+                    b.HasIndex("ReferenceNumber")
+                        .IsUnique();
 
                     b.ToTable("AccountTransaction", "dbo");
                 });
@@ -249,6 +253,9 @@ namespace Vb.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("IsDefault")
+                        .IsUnique();
 
                     b.HasIndex("Information", "ContactType")
                         .IsUnique();
@@ -373,7 +380,8 @@ namespace Vb.Data.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.HasIndex("ReferenceNumber");
+                    b.HasIndex("ReferenceNumber")
+                        .IsUnique();
 
                     b.ToTable("EftTransaction", "dbo");
                 });
