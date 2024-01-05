@@ -24,7 +24,7 @@ public class CustomerCommandHandler :
         this.mapper = mapper;
     }
 
-    public async Task<ApiResponse<CustomerResponse>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<CustomerResponse>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken) 
     {
         var checkIdentity = await dbContext.Set<Customer>().Where(x => x.IdentityNumber == request.Model.IdentityNumber)
             .FirstOrDefaultAsync(cancellationToken);
@@ -68,7 +68,6 @@ public class CustomerCommandHandler :
         {
             return new ApiResponse("Record not found");
         }
-        //dbContext.Set<Customer>().Remove(fromdb);
         
         fromdb.IsActive = false;
         await dbContext.SaveChangesAsync(cancellationToken);
